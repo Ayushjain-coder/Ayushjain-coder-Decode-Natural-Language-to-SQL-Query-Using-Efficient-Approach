@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<title>Fetched Data</title>
+
+	<style type="text/css">
+
+		*{
+		 margin:0;
+		 padding: 0;
+		 font-family: sans-serif;
+		 outline: 0;
+		}
+
+		body{
+
+         height: 100vh;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         background: url('/static/nlp-sql.png');
+         background-repeat: no-repeat;
+  			background-attachment: fixed;
+
+      }
+
+      h1{
+      	position: fixed;
+         top: 10%;
+         left: 0%;
+         right: 0%;
+         font-size: 60px;
+         color: white;
+      }
+
+      h3{
+      	position: absolute;
+         top: 25%;
+         left: 10%;
+         right: 10%;
+         font-size: 25px;
+         color: lightblue;
+      }
+
+      h3 > i {
+      	color: black;
+      } 
+
+      table{
+			 position: absolute;
+			 top: 50%;
+			 left: 50%;
+			 right: 50%;
+			 transform: translate(-50%,-50%);
+			 width: 60%; 
+			 border-collapse: collapse;
+			 border-spacing: 0;
+			 box-shadow: 0 2px 15px rgba(64,64,64,.7);
+			 border-radius: 3px 3px 0 0;
+			 overflow: hidden;
+
+		}	
+
+		td , th{
+			 padding: 10px 15px;
+			 text-align: center;
+
+		}
+
+		th{
+			 background-color: #ba68c8;
+			 color: #fafafa;
+			 font-family: 'Open Sans',Sans-serif;
+			 font-weight: 200;
+			 text-transform: uppercase;
+
+		}
+
+		tr{
+			 width: 100%;
+			 background-color: #fafafa;
+			 font-family: 'Montserrat', sans-serif;
+		}
+
+		tr:nth-child(even){
+			 background-color: #eeeeee;
+		}     		
+
+	</style>
+
+	<link rel="stylesheet" href="/static/loader.css">
+
+</head>
+<body>
+
+<div class="loader_bg">
+   <div class="loader"></div>
+</div>  
+
+<center>	
+
+{% if data[0] == 0 %}
+
+	<h1 style="top: 40%;">Query Not Recognized !!</h1>	
+
+{% else %}
+
+	<h1 style="color: white;">Fetched Data</h1>
+
+	<h3>SQL QUERY: &nbsp;&nbsp;<i>{{data[1]}}</i></h3>
+
+	<div class="outer">
+
+		<table>
+			<tr>
+					{% for j in data[2] %}
+						<th>
+							{{j}}	
+						</th>	
+					{% endfor %}
+			</tr>
+
+			{% for i in range(3, len) %}
+				<tr>
+					{% for j in data[i] %}
+						<td>
+							{{j}}	
+						</td>	
+					{% endfor %}
+				</tr>	
+			{% endfor %}
+		</table>
+
+	</div>
+
+{% endif %}
+
+</center>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+   
+setTimeout(function(){
+         $('.loader_bg').fadeToggle();
+}, 1000);
+
+</script>
+
+</body>
+</html>

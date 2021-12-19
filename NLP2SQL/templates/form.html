@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+   <title>Fetched Data</title>
+   <style type="text/css">
+      
+      *{
+
+         margin: 0;
+
+         padding: 0;
+
+         font-family: sans-serif;
+
+         box-sizing: border-box;
+
+      }
+
+      body{
+
+         height: 100vh;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         background: url('/static/nlp-sql.png');
+         background-repeat: no-repeat;
+         background-attachment: fixed;
+
+      }
+
+      h1{
+
+         position: absolute;
+
+         top: 30%;
+
+         font-size: 60px;
+
+         color: white;
+
+      }
+
+      .box{
+
+         width: 600px;
+
+         height: 50px;
+
+         background-color: white;
+
+         border-radius: 30px;
+
+         display: flex;
+
+         align-items: center;
+
+         padding: 20px;
+
+      }
+
+      .box .btn1 {
+         margin-right: 12px;
+      }
+
+      .box i {
+
+         font-size: 20px;
+
+         color: #000;
+
+      }
+
+      .box > input{
+
+         flex: 1;
+
+         height: 40px;
+
+         border: none;
+
+         outline: none;
+
+         font-size: 18px;
+
+         padding-left: 10px;
+
+        padding-right: 10px;
+
+      }
+
+   </style>
+
+   <link rel="stylesheet" type="text/css" href="style.css">
+
+   <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+   <link rel="stylesheet" href="/static/loader.css">
+
+</head>
+<body>
+
+<div class="loader_bg">
+   <div class="loader"></div>
+</div>  
+
+<h1>NLP to SQL</h1>
+
+<form id="form_id" action="/query_data" method = "POST">
+  
+   <div class="box">
+
+      <input type="text" id="input_text" name="nlp_query" value="{{command}}" placeholder="Write NLP Query......." autocomplete="off">
+  
+      <button class="btn1" style="border: 0; background-color: white;" onclick="voice_take()">
+         <i class="fa fa-microphone" aria-hidden="true"></i>
+      </button>
+
+      <button type="submit" class="btn2" style="border: 0; background-color: white;">
+         <i class="fa fa-search" aria-hidden="true"></i>
+      </button>
+ 
+   </div>
+    
+</form>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+
+
+$(document).ready(function() {
+  $(window).keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+});
+
+setTimeout(function(){
+         $('.loader_bg').fadeToggle();
+}, 1000);
+
+function voice_take() {
+   document.getElementById("form_id").action = "/take_command";
+   document.getElementById("form_id").submit();
+}
+
+</script>
+
+</body>
+</html>
